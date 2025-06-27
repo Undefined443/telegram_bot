@@ -4,7 +4,11 @@ import signal
 import sys
 import requests
 import GPUtil
+import os
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 INTERVAL = 2
 
@@ -28,7 +32,7 @@ def get_gpu_usage_gputil():
 
 
 def send_message(message: str):
-    bot_token = "7791912773:AAFqy-7ZRwlgIFr8NyPDFTEqa6NurfZpNUQ"
+	bot_token = os.getenv('BOT_TOKEN')
     chat_id = "1800469436"
     assert message is not None
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
