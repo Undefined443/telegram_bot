@@ -6,8 +6,7 @@ import torch as th
 
 MEM_FREE = 0.1
 LATENCY = 0.08
-#LATENCY = 1
-
+TRAIN = False
 
 def signal_handler(sig, frame):
     print("\nCtrl+C entered, exiting...")
@@ -40,10 +39,11 @@ def main():
             print(f"Failed to preserve memory on GPU {i}: {e}")
 
     while True:
-        for i, tensor in enumerate(tensors):
-            model = models[i]
-            _ = model(tensor)
-        time.sleep(LATENCY)
+        if TRAIN:
+            for i, tensor in enumerate(tensors):
+                model = models[i]
+                _ = model(tensor)
+            time.sleep(LATENCY)
 
 
 if __name__ == "__main__":
